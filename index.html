@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rafael Silva - Desarrollo Web, Automatización y Proyectos Digitales">
+    <meta name="description" content="Rafael Silva - Desarrollo Web, Automatización y Proyectos Digitales. Soluciones tecnológicas simples, eficientes y escalables para tu negocio.">
     <meta name="author" content="Rafael Silva">
+    <meta name="theme-color" content="#00d4aa">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rafael Silva | Desarrollo Web & Tecnología">
+    <meta property="og:description" content="Desarrollo e implementación de soluciones tecnológicas simples, eficientes y escalables. Transformo ideas en productos digitales reales.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rafasilva.dev">
+
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='50' y='70' font-size='70' text-anchor='middle' fill='%2300d4aa' font-family='system-ui, sans-serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+
     <title>Rafael Silva | Desarrollo Web & Tecnología</title>
     
     <!-- Google Fonts -->
@@ -41,6 +52,20 @@
             scroll-behavior: smooth;
         }
 
+        /* Respect user preference for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         body {
             font-family: var(--font-main);
             background-color: var(--color-bg);
@@ -61,6 +86,104 @@
 
         section {
             padding: 100px 0;
+            scroll-margin-top: 80px; /* Prevent content hiding behind navbar */
+        }
+
+        /* ========================================
+           STICKY NAVBAR
+        ======================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .navbar-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+        }
+
+        .navbar-logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            transition: var(--transition);
+        }
+
+        .navbar-logo:hover {
+            color: var(--color-accent);
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .navbar-links a:hover {
+            color: var(--color-text);
+        }
+
+        .navbar-links a.active {
+            color: var(--color-accent);
+        }
+
+        .navbar-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            box-shadow: 0 0 8px rgba(0, 212, 170, 0.4);
+        }
+
+        .navbar-cta {
+            padding: 10px 24px;
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .navbar-cta:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Hide nav links on small screens, keep logo + CTA */
+        @media (max-width: 768px) {
+            .navbar-links li:not(:last-child) {
+                display: none;
+            }
         }
 
         /* ========================================
@@ -97,6 +220,29 @@
             z-index: 1;
         }
 
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid var(--color-accent);
+            border-radius: 24px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+            box-shadow: 0 0 20px rgba(0, 212, 170, 0.15);
+        }
+
+        .availability-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            box-shadow: 0 0 8px var(--color-accent);
+        }
+
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 700;
@@ -125,6 +271,14 @@
             line-height: 1.8;
         }
 
+        .hero-ctas {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
         .btn {
             display: inline-block;
             padding: 16px 40px;
@@ -143,6 +297,50 @@
             background-color: var(--color-accent-hover);
             transform: translateY(-2px);
             box-shadow: 0 10px 40px rgba(0, 212, 170, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-bg-card);
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.1);
+        }
+
+        .hero-stack {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stack-label {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .stack-chip {
+            padding: 6px 14px;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--color-text);
+            transition: var(--transition);
+        }
+
+        .stack-chip:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
         }
 
         /* ========================================
@@ -181,6 +379,12 @@
         .service-card:hover {
             border-color: var(--color-accent);
             transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.1);
+        }
+
+        .service-card:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
         }
 
         .service-icon {
@@ -222,29 +426,85 @@
             gap: 24px;
         }
 
-        .project-placeholder {
+        .project-card {
             background-color: var(--color-bg-card);
-            border: 1px dashed var(--color-border);
+            border: 1px solid var(--color-border);
             border-radius: 12px;
-            padding: 60px 32px;
+            padding: 32px;
             transition: var(--transition);
+            text-align: left;
         }
 
-        .project-placeholder:hover {
+        .project-card:hover {
             border-color: var(--color-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.1);
         }
 
-        .placeholder-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 16px;
-            color: var(--color-text-muted);
-            opacity: 0.5;
+        .project-header {
+            margin-bottom: 16px;
         }
 
-        .placeholder-text {
+        .project-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--color-text);
+        }
+
+        .project-description {
             color: var(--color-text-muted);
             font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid;
+        }
+
+        .status-desarrollo {
+            color: #fbbf24;
+            border-color: #fbbf24;
+            background-color: rgba(251, 191, 36, 0.1);
+        }
+
+        .status-activo {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+            background-color: rgba(0, 212, 170, 0.1);
+        }
+
+        .status-proximamente {
+            color: #8b5cf6;
+            border-color: #8b5cf6;
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 20px;
+            background-color: transparent;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .project-link:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
         }
 
         /* ========================================
@@ -304,6 +564,28 @@
         }
 
         /* ========================================
+           SCROLL REVEAL ANIMATIONS
+        ======================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========================================
            RESPONSIVE
         ======================================== */
         @media (max-width: 768px) {
@@ -348,18 +630,44 @@
 <body>
 
     <!-- ========================================
+         STICKY NAVBAR
+    ======================================== -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#inicio" class="navbar-logo">rafasilva.dev</a>
+            <ul class="navbar-links">
+                <li><a href="#inicio" data-section="inicio">Inicio</a></li>
+                <li><a href="#servicios" data-section="servicios">Qué hago</a></li>
+                <li><a href="#proyectos" data-section="proyectos">Proyectos</a></li>
+                <li><a href="#contacto" class="navbar-cta">Contáctame</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========================================
          HERO SECTION
     ======================================== -->
-    <section class="hero">
+    <section class="hero" id="inicio">
         <div class="container">
             <div class="hero-content">
+                <div class="availability-badge">Disponible para proyectos</div>
                 <h1 class="hero-title">Rafael Silva</h1>
                 <p class="hero-subtitle">Tecnología · Desarrollo Web · Automatización · Proyectos Digitales</p>
                 <p class="hero-description">
-                    Desarrollo e implementación de soluciones tecnológicas simples, eficientes y escalables. 
+                    Desarrollo e implementación de soluciones tecnológicas simples, eficientes y escalables.
                     Transformo ideas en productos digitales reales.
                 </p>
-                <a href="#contacto" class="btn">Contáctame</a>
+                <div class="hero-ctas">
+                    <a href="#contacto" class="btn">Contáctame</a>
+                    <a href="#proyectos" class="btn btn-secondary">Ver proyectos</a>
+                </div>
+                <div class="hero-stack">
+                    <span class="stack-label">Stack</span>
+                    <span class="stack-chip">HTML</span>
+                    <span class="stack-chip">CSS</span>
+                    <span class="stack-chip">JavaScript</span>
+                    <span class="stack-chip">Automations</span>
+                </div>
             </div>
         </div>
     </section>
@@ -369,44 +677,44 @@
     ======================================== -->
     <section class="services" id="servicios">
         <div class="container">
-            <h2 class="section-title">Qué <span>hago</span></h2>
+            <h2 class="section-title reveal">Qué <span>hago</span></h2>
             <div class="services-grid">
                 
                 <!-- Desarrollo Web -->
-                <article class="service-card">
+                <article class="service-card reveal">
                     <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="16 18 22 12 16 6"></polyline>
                         <polyline points="8 6 2 12 8 18"></polyline>
                     </svg>
                     <h3 class="service-title">Desarrollo Web</h3>
                     <p class="service-description">
-                        Sitios web y aplicaciones modernas, rápidas y optimizadas. 
+                        Sitios web y aplicaciones modernas, rápidas y optimizadas.
                         Desde landing pages hasta plataformas completas con código limpio y mantenible.
                     </p>
                 </article>
 
                 <!-- Automatización & Sistemas -->
-                <article class="service-card">
+                <article class="service-card reveal">
                     <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="3"></circle>
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                     </svg>
                     <h3 class="service-title">Automatización & Sistemas</h3>
                     <p class="service-description">
-                        Automatizo procesos repetitivos y conecto sistemas para que tu negocio 
+                        Automatizo procesos repetitivos y conecto sistemas para que tu negocio
                         funcione de forma más inteligente y eficiente.
                     </p>
                 </article>
 
                 <!-- Consultoría Tecnológica -->
-                <article class="service-card">
+                <article class="service-card reveal">
                     <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                     </svg>
                     <h3 class="service-title">Consultoría Tecnológica / MVP</h3>
                     <p class="service-description">
-                        Te ayudo a definir, validar y lanzar tu producto mínimo viable. 
+                        Te ayudo a definir, validar y lanzar tu producto mínimo viable.
                         Asesoría técnica para tomar mejores decisiones desde el inicio.
                     </p>
                 </article>
@@ -420,42 +728,48 @@
     ======================================== -->
     <section class="projects" id="proyectos">
         <div class="container">
-            <h2 class="section-title">Mis <span>proyectos</span></h2>
-            <p class="projects-intro">
-                Este sitio funciona como base para mis proyectos actuales y futuros. 
+            <h2 class="section-title reveal">Mis <span>proyectos</span></h2>
+            <p class="projects-intro reveal">
+                Este sitio funciona como base para mis proyectos actuales y futuros.
                 Próximamente encontrarás aquí herramientas, experimentos y productos digitales.
             </p>
             <div class="projects-grid">
-                
-                <!-- Placeholder 1 -->
-                <div class="project-placeholder">
-                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
-                    <p class="placeholder-text">Próximo proyecto</p>
-                </div>
 
-                <!-- Placeholder 2 -->
-                <div class="project-placeholder">
-                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
-                    <p class="placeholder-text">Próximo proyecto</p>
-                </div>
+                <!-- Mascotiva -->
+                <article class="project-card reveal">
+                    <div class="project-header">
+                        <h3 class="project-title">Mascotiva</h3>
+                        <span class="project-status status-desarrollo">En desarrollo</span>
+                    </div>
+                    <p class="project-description">
+                        Plataforma de gestión veterinaria integral para optimizar atención y administración de clínicas.
+                    </p>
+                    <a href="#" class="project-link">Ver</a>
+                </article>
 
-                <!-- Placeholder 3 -->
-                <div class="project-placeholder">
-                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
-                    <p class="placeholder-text">Próximo proyecto</p>
-                </div>
+                <!-- UniversoVet -->
+                <article class="project-card reveal">
+                    <div class="project-header">
+                        <h3 class="project-title">UniversoVet</h3>
+                        <span class="project-status status-activo">Activo</span>
+                    </div>
+                    <p class="project-description">
+                        Web y soluciones digitales para clínica veterinaria con presencia online moderna.
+                    </p>
+                    <a href="#" class="project-link">Ver</a>
+                </article>
+
+                <!-- Automatizaciones -->
+                <article class="project-card reveal">
+                    <div class="project-header">
+                        <h3 class="project-title">Automatizaciones</h3>
+                        <span class="project-status status-proximamente">Próximamente</span>
+                    </div>
+                    <p class="project-description">
+                        Herramientas internas y flujos automatizados para optimizar procesos empresariales.
+                    </p>
+                    <a href="#" class="project-link">Ver</a>
+                </article>
 
             </div>
         </div>
@@ -466,18 +780,20 @@
     ======================================== -->
     <section class="contact" id="contacto">
         <div class="container">
-            <h2 class="section-title">Hablemos</h2>
-            <p class="contact-description">
-                ¿Tienes una idea, proyecto o necesitas apoyo tecnológico? 
-                Estoy disponible para conversar y encontrar la mejor solución.
-            </p>
-            <a href="mailto:contacto@rafasilva.dev" class="btn">Contáctame</a>
-            <div class="contact-email">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                <span>contacto@rafasilva.dev</span>
+            <h2 class="section-title reveal">Hablemos</h2>
+            <div class="reveal">
+                <p class="contact-description">
+                    ¿Tienes una idea, proyecto o necesitas apoyo tecnológico?
+                    Estoy disponible para conversar y encontrar la mejor solución.
+                </p>
+                <a href="mailto:contacto@rafasilva.dev" class="btn">Contáctame</a>
+                <div class="contact-email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>contacto@rafasilva.dev</span>
+                </div>
             </div>
         </div>
     </section>
@@ -487,9 +803,86 @@
     ======================================== -->
     <footer>
         <div class="container">
-            <p class="footer-text">© Rafael Silva – <a href="https://rafasilva.dev">rafasilva.dev</a></p>
+            <p class="footer-text">© Rafael Silva – <a href="https://rafasilva.dev">rafasilva.dev</a> · Chile · Remoto</p>
         </div>
     </footer>
+
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
+    <script>
+        // ========================================
+        // NAVIGATION ACTIVE STATE (IntersectionObserver)
+        // ========================================
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-links a[data-section]');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-100px 0px -66%',
+            threshold: 0
+        };
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.getAttribute('id');
+
+                    // Remove active from all nav links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+
+                    // Add active to corresponding nav link
+                    const activeLink = document.querySelector(`.navbar-links a[data-section="${sectionId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        sections.forEach(section => {
+            navObserver.observe(section);
+        });
+
+        // ========================================
+        // SCROLL REVEAL ANIMATIONS (IntersectionObserver)
+        // ========================================
+        const revealElements = document.querySelectorAll('.reveal');
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (prefersReducedMotion) {
+            // If reduced motion is preferred, make everything visible immediately
+            revealElements.forEach(el => {
+                el.classList.add('is-visible');
+            });
+        } else {
+            // Otherwise, use IntersectionObserver for animations
+            const revealObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: stop observing once revealed
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, revealObserverOptions);
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+        }
+    </script>
 
 </body>
 </html>
