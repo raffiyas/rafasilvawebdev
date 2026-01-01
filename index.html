@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rafael Silva - Desarrollo Web, Automatización y Proyectos Digitales">
+    <meta name="author" content="Rafael Silva">
+    <title>Rafael Silva | Desarrollo Web & Tecnología</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           VARIABLES Y RESET
+        ======================================== */
+        :root {
+            --color-bg: #0a0a0b;
+            --color-bg-secondary: #111113;
+            --color-bg-card: #16161a;
+            --color-text: #e4e4e7;
+            --color-text-muted: #71717a;
+            --color-accent: #00d4aa;
+            --color-accent-hover: #00f5c4;
+            --color-border: #27272a;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           UTILIDADES
+        ======================================== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de gradiente sutil en el fondo */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at 30% 40%,
+                rgba(0, 212, 170, 0.03) 0%,
+                transparent 50%
+            );
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            color: var(--color-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.25);
+        }
+
+        /* ========================================
+           QUÉ HAGO SECTION
+        ======================================== */
+        .services {
+            background-color: var(--color-bg-secondary);
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 60px;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title span {
+            color: var(--color-accent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 40px 32px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 24px;
+            color: var(--color-accent);
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .service-description {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           PROYECTOS SECTION
+        ======================================== */
+        .projects {
+            text-align: center;
+        }
+
+        .projects-intro {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .project-placeholder {
+            background-color: var(--color-bg-card);
+            border: 1px dashed var(--color-border);
+            border-radius: 12px;
+            padding: 60px 32px;
+            transition: var(--transition);
+        }
+
+        .project-placeholder:hover {
+            border-color: var(--color-accent);
+        }
+
+        .placeholder-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 16px;
+            color: var(--color-text-muted);
+            opacity: 0.5;
+        }
+
+        .placeholder-text {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ========================================
+           CONTACTO SECTION
+        ======================================== */
+        .contact {
+            background-color: var(--color-bg-secondary);
+            text-align: center;
+        }
+
+        .contact-description {
+            color: var(--color-text-muted);
+            font-size: 1.15rem;
+            max-width: 500px;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--color-text);
+            font-size: 1rem;
+            margin-top: 24px;
+            opacity: 0.7;
+        }
+
+        .contact-email svg {
+            width: 18px;
+            height: 18px;
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-text {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-text a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-text a:hover {
+            color: var(--color-accent-hover);
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+
+            .hero {
+                min-height: 90vh;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 32px 24px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .btn {
+                padding: 14px 32px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         HERO SECTION
+    ======================================== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Rafael Silva</h1>
+                <p class="hero-subtitle">Tecnología · Desarrollo Web · Automatización · Proyectos Digitales</p>
+                <p class="hero-description">
+                    Desarrollo e implementación de soluciones tecnológicas simples, eficientes y escalables. 
+                    Transformo ideas en productos digitales reales.
+                </p>
+                <a href="#contacto" class="btn">Contáctame</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         QUÉ HAGO SECTION
+    ======================================== -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <h2 class="section-title">Qué <span>hago</span></h2>
+            <div class="services-grid">
+                
+                <!-- Desarrollo Web -->
+                <article class="service-card">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                    <h3 class="service-title">Desarrollo Web</h3>
+                    <p class="service-description">
+                        Sitios web y aplicaciones modernas, rápidas y optimizadas. 
+                        Desde landing pages hasta plataformas completas con código limpio y mantenible.
+                    </p>
+                </article>
+
+                <!-- Automatización & Sistemas -->
+                <article class="service-card">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <h3 class="service-title">Automatización & Sistemas</h3>
+                    <p class="service-description">
+                        Automatizo procesos repetitivos y conecto sistemas para que tu negocio 
+                        funcione de forma más inteligente y eficiente.
+                    </p>
+                </article>
+
+                <!-- Consultoría Tecnológica -->
+                <article class="service-card">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <h3 class="service-title">Consultoría Tecnológica / MVP</h3>
+                    <p class="service-description">
+                        Te ayudo a definir, validar y lanzar tu producto mínimo viable. 
+                        Asesoría técnica para tomar mejores decisiones desde el inicio.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PROYECTOS SECTION
+    ======================================== -->
+    <section class="projects" id="proyectos">
+        <div class="container">
+            <h2 class="section-title">Mis <span>proyectos</span></h2>
+            <p class="projects-intro">
+                Este sitio funciona como base para mis proyectos actuales y futuros. 
+                Próximamente encontrarás aquí herramientas, experimentos y productos digitales.
+            </p>
+            <div class="projects-grid">
+                
+                <!-- Placeholder 1 -->
+                <div class="project-placeholder">
+                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    <p class="placeholder-text">Próximo proyecto</p>
+                </div>
+
+                <!-- Placeholder 2 -->
+                <div class="project-placeholder">
+                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    <p class="placeholder-text">Próximo proyecto</p>
+                </div>
+
+                <!-- Placeholder 3 -->
+                <div class="project-placeholder">
+                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    <p class="placeholder-text">Próximo proyecto</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CONTACTO SECTION
+    ======================================== -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Hablemos</h2>
+            <p class="contact-description">
+                ¿Tienes una idea, proyecto o necesitas apoyo tecnológico? 
+                Estoy disponible para conversar y encontrar la mejor solución.
+            </p>
+            <a href="mailto:contacto@rafasilva.dev" class="btn">Contáctame</a>
+            <div class="contact-email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>contacto@rafasilva.dev</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© Rafael Silva – <a href="https://rafasilva.dev">rafasilva.dev</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
